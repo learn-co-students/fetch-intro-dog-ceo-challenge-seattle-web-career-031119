@@ -103,10 +103,14 @@ function filterDogs() {
       filteredBreeds.push(key)
     }
   })
+  if (filteredBreeds !== []) {
   filteredBreeds.forEach( breed => {
       breedsHash[breed] = breedsFullHash[breed]
-  })
-  console.log(breedsHash)
+  })} else {
+    breedsHash["Nothing for this letter"] = []
+  }
+  // console.log(breedsHash)
+
   displayBreeds(breedsHash)
 }
 

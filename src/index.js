@@ -1,5 +1,6 @@
 //global dogPic array to pass into
 DOGPICS = []
+DOGBREEDS =[]
 
 console.log('%c HI', 'color: firebrick')
 
@@ -25,7 +26,6 @@ function addDog(url){
 }
 
 function fetchBreeds(){
-
 	fetch('https://dog.ceo/api/breeds/list/all')
 	.then(response => {return response.json() })
 	.then(json => {
@@ -35,7 +35,9 @@ function fetchBreeds(){
 	// 	displayBreeds(json.message[i])
 	// }
 	for (let dog in json.message){
-		console.log(dog + 'hello there dog')
+		// console.log(dog + '	hello there dog')
+		DOGBREEDS.push(dog)
+	//console log to check here
 		displayBreeds(dog)
 	}
 	})
@@ -45,8 +47,6 @@ function displayBreeds(breed){
 	let li = document.createElement('li')
 	li.textContent = breed
 
-
-	// let dogColor = document.getElementById(li)
 	//append to li bc the event has to be on every individual
 	//list item
 	li.addEventListener('click', () => {
@@ -55,7 +55,26 @@ function displayBreeds(breed){
 	breedList.appendChild(li)
 }
 
+function clearBreedsList(){
+	while (breedList.firstChild) {
+		breedList.firstChild.remove()
+	}
+}
 
+function filterBreeds(){
+let breedsList = document.getElementById('breed-dropdown').value
+clearBreeds()
+
+
+	DOGBREEDS.forEach(breed => {
+		if(breed[0]== breedList){
+			const li = document.createElement('li')
+			li.textContent = breed
+			breedList.appendChild(li)
+			li.addEventListener('click')
+		}
+	})
+}
 
 
 loadImage()
